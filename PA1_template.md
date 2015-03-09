@@ -1,6 +1,6 @@
 # Reproducible Research: Peer Assessment 1
 Reginald Carey  
-March 6, 2015  
+March 9, 2015  
 
 ## Loading and preprocessing the data
 
@@ -265,9 +265,9 @@ legend("topright",
 ![](PA1_template_files/figure-html/unnamed-chunk-13-1.png) 
 
 ```r
-## Calculate and report the mean and median of the total number of steps taken per day
-
-sprintf("Original meanSteps is %f.  Imputed meanSteps is %f",meanSteps, meanImputedSteps)
+## Calculate and report the mean of the total number of steps taken per day
+sprintf("Original meanSteps is %f.  Imputed meanSteps is %f",
+        meanSteps, meanImputedSteps)
 ```
 
 ```
@@ -275,7 +275,9 @@ sprintf("Original meanSteps is %f.  Imputed meanSteps is %f",meanSteps, meanImpu
 ```
 
 ```r
-sprintf("Original medianSteps is %f.  Imputed medianSteps is %f", medianSteps, medianImputedSteps)
+## Calculate and report the median of the total number of steps taken per day
+sprintf("Original medianSteps is %f.  Imputed medianSteps is %f", 
+        medianSteps, medianImputedSteps)
 ```
 
 ```
@@ -322,22 +324,23 @@ par(mfrow=c(2,1))
 
 timeSeries <- aggregate(steps~interval, subset(imputed, dayType == "weekday"), mean)
 
-par(mar=c(1.25,4,3,1))
+par(mar=c(0,4,3,1))
 plot(
   timeSeries$interval,
   timeSeries$steps, 
   type = "l",
   xlab = NA,
   ylab = NA,
+  xaxt = "n",
   col = "darkgreen",
-  lwd = 1)
+  lwd = 2)
 legend("topleft", "Weekday", bty = "n")
 mtext(side = 2, "Mean # Steps Taken", line = 2.5)
 title("Average Daily Activity Pattern")
 
 timeSeries <- aggregate(steps~interval, subset(imputed, dayType == "weekend"), mean)
 
-par(mar=c(3.5,4,1.25,1))
+par(mar=c(3.5,4,0,1))
 plot(
   timeSeries$interval,
   timeSeries$steps, 
@@ -345,11 +348,11 @@ plot(
   xlab = NA,
   ylab = NA,
   col = "darkgreen",
-  lwd = 1)
+  lwd = 2)
 legend("topleft", "Weekend", bty = "n")
+mtext(side = 2, "Mean # Steps Taken", line = 2.5)
 
 mtext(side = 1, "Time Interval", line = 2.5)
-mtext(side = 2, "Mean # Steps Taken", line = 2.5)
 ```
 
 ![](PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
